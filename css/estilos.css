@@ -1,0 +1,69 @@
+.principal {
+ padding-top:5%;
+ padding-bottom:5%;
+}
+
+.tateti {
+ font-family: "Arial Black", Gadget, sans-serif;
+ font-size: 16px;
+ letter-spacing: -1.2px;
+ word-spacing: 0.4px;
+ color: #000000;
+ font-weight: normal;
+ text-decoration: none;
+ font-style: normal;
+ font-variant: normal;
+ text-transform: none;
+}
+
+.mensajeinferior {
+ margin-top:1%;
+}
+
+.fila1 {
+ height:80px;
+ width:100%;
+ #background-color:#557777;
+ padding-right:0px;
+ margin-bottom:10px;
+ color:red;
+ border-bottom: 3px dotted #1C6EA4;
+ vertical-align:baseline;
+}
+
+.columna1 {
+ border-right: 3px dotted #1C6EA4;	
+}
+
+.fila2 {
+ height:80px;
+ width:100%;
+ #background-color:#557777; 
+ padding-left:0px; 
+ margin-top:5px;
+ margin-bottom:10px;
+ color:red;
+ border-bottom: 3px dotted #1C6EA4;
+ vertical-align:baseline;
+}
+
+.columna2 {
+ 
+}
+
+.fila3 {
+ height:80px;
+ width:100%;
+ #background-color:#557777; 
+ color:red;
+ vertical-align:baseline;
+}
+
+.columna3 {
+ border-left: 3px dotted #1C6EA4;
+}
+
+.imagenobjeto {
+ width: auto;
+ height: 60px;
+}

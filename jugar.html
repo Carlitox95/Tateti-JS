@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <meta name="description" content="">
+ <meta name="author" content="">
+ <title>Tateti con Carlitox</title>
+ <!-- Bootstrap core CSS -->
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+ <link href="css/estilos.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Tateti con Carlitox</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+          </li>          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+ 
+ <!-- Contenedor -->
+ <div class="container principal">
+ <center>
+ <button type="button" class="btn btn-primary btn-lg btn-block" onclick="iniciarJuego();">Iniciar / Reiniciar Juego</button>
+ </center> 
+ <hr> 
+    <div class="row justify-content-center">
+    <!-- Cuadro del TATETI -->  
+    <div class="col-sm-10 tateti">      
+     <div class="row justify-content-center"> 
+     <div class="col-sm">
+     <div class="fila1 columna1" id="posicion1" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion1</div>
+     <div class="fila2 columna1" id="posicion4" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion4</div>
+     <div class="fila3 columna1" id="posicion7" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion7</div>
+     </div>
+     <div class="col-sm">    
+      <div class="fila1 columna2" id="posicion2" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion2</div>
+      <div class="fila2 columna2" id="posicion5" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion5</div>
+      <div class="fila3 columna2" id="posicion8" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion8</div>
+     </div>
+     <div class="col-sm">      
+      <div class="fila1 columna3" id="posicion3" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion3</div>
+      <div class="fila2 columna3" id="posicion6" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion6</div>
+      <div class="fila3 columna3" id="posicion9" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion9</div>
+     </div> 
+    </div>
+    <!-- Termina el cuadro del TATETI -->
+    </div>
+    <!-- Inicia la columna de la derecha -->
+    <div class="col-sm-2">
+     <h6>Jugadores Activos</h6>
+     <hr>
+     <ul class="list-group list-group-flush" id="listadojugadores">
+     
+     </ul>
+     <hr>
+     <h6>Turno Actual</h6><p id="turnoJugador"></p>
+     <hr>
+     <h6>Paso Actual: </h6><p id="pasoActual"></p>
+    </div>
+    <!-- Termina la columna de la derecha -->
+    </div>
+
+<!-- Inicia el Mensaje que aparece en la parte inferior de la pantalla -->
+<div class="mensajeinferior alert alert-info" id="mensajeInferior" align="center"> 
+
+</div>
+<!-- Termina el Mensaje que aparece en la parte inferior de la pantalla -->
+
+<!-- Inicia el mensaje donde se informa al ganador del juego -->
+<div class="alert alert-success" id="mensajeFinal" align="center">
+ <strong>La partida aun se encuentra en disputa!</strong>
+</div>
+<!-- Termina el mensaje donde se informa al ganador del juego -->
+
+</div> 
+<!-- Termina el contenedor -->
+</body>
+<!-- Bootstrap core JavaScript -->
+ <script src="js/jquery.min.js"></script>
+ <script src="js/bootstrap.bundle.min.js"></script>
+ <script src="js/jugar.js"></script>
+</html>
