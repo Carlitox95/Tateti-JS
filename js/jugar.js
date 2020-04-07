@@ -97,6 +97,7 @@ function reiniciarJuego() {
  listadoTurnos=[]; //si reinicio debo vaciar el listado de turnos sucesivos
  definirArranque(); //por lo cual debo volver a definir quien arranca
  limpiarContenedores(); //limpio los contenedores
+ partidaFinalizada=false; //vuelvo a permitir la seleccion
  document.getElementById("pasoActual").innerHTML=1; //Vuelvo al paso inicial
  document.getElementById("mensajeFinal").innerHTML="<strong>La partida aun se encuentra en disputa!</strong>";
  document.getElementById("posicion9").innerHTML=""; //por algua razon en esa posicion se genera un vacio REPARAR!
