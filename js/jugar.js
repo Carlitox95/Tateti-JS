@@ -10,12 +10,18 @@ let player2=datosejercicio.jugador2;
 //Seteo la maxima cantidad de movimientos que se pueden realizar (hay 9 espacios)
 let turnosMax=9; 
 
+//Variable que usamos para cortar la ejecucion del juego en caso de haber un ganador
+let partidaFinalizada=false;
+
 //Seteo el paso actual del juego
 let pasoActual=0;
 document.getElementById("pasoActual").innerHTML=1;
 
 //Voy a definir el listado de los turnos
 let listadoTurnos=[];
+
+//Contiene el listado de elementos que cambiaron su estilo a ganadora durante la ultima ronda
+let listadoElementosGanadores=[];
 
 //Defino los links de las imagenes para completar
 let imagenCirculo="image/circulo.png";
@@ -90,6 +96,7 @@ function reiniciarJuego() {
     }
  listadoTurnos=[]; //si reinicio debo vaciar el listado de turnos sucesivos
  definirArranque(); //por lo cual debo volver a definir quien arranca
+ limpiarContenedores(); //limpio los contenedores
  document.getElementById("pasoActual").innerHTML=1; //Vuelvo al paso inicial
  document.getElementById("mensajeFinal").innerHTML="<strong>La partida aun se encuentra en disputa!</strong>";
  document.getElementById("posicion9").innerHTML=""; //por algua razon en esa posicion se genera un vacio REPARAR!
@@ -129,49 +136,52 @@ function definirArranque() {
 
 //Funcion asigna la seleccion de un elemento , asignando cruz o circulo
 function seleccionElemento(elemento) {
- //Obtengo el numero de paso actual
- let nroActual=document.getElementById("pasoActual").innerHTML; //obtengo el paso actual
- let contenidoImagenPaso=listadoTurnos[parseInt(nroActual)-parseInt(1)][1]; //obtengo la imagen correspondiente al turno
- let nombreJugadorActual=listadoTurnos[parseInt(nroActual)-parseInt(1)][0]; //almaceno el nombre del jugador actual en accion
+
+    if (partidaFinalizada==false) {
+     //Obtengo el numero de paso actual
+     let nroActual=document.getElementById("pasoActual").innerHTML; //obtengo el paso actual
+     let contenidoImagenPaso=listadoTurnos[parseInt(nroActual)-parseInt(1)][1]; //obtengo la imagen correspondiente al turno
+     let nombreJugadorActual=listadoTurnos[parseInt(nroActual)-parseInt(1)][0]; //almaceno el nombre del jugador actual en accion
  
- //Vamos a crear la imagen para insertar el contenedor
- let imagenPaso=document.createElement("img");
- imagenPaso.src=contenidoImagenPaso;
- imagenPaso.className="imagenobjeto";
- let tipoImagen=listadoTurnos[parseInt(nroActual)-parseInt(1)][3]; //es cruz o circulo
+     //Vamos a crear la imagen para insertar el contenedor
+     let imagenPaso=document.createElement("img");
+     imagenPaso.src=contenidoImagenPaso;
+     imagenPaso.className="imagenobjeto";
+     let tipoImagen=listadoTurnos[parseInt(nroActual)-parseInt(1)][3]; //es cruz o circulo
 
-    //Si el elemento tiene asignado el estado libre , entonces se puede seleccionar ese casillero
-    if (elemento.getAttribute("estado")=="libre") {
-     //Genero el contenido HTML para meter en el contenedor correspondiente al paso
-     let contenidoElemento= document.createElement("center"); 
-     contenidoElemento.appendChild(imagenPaso);
-     //Asigno el elememento seleccion
-     let elementoSeleccion=document.getElementById(elemento.id); //guardo el elemento seleccionado
-     elementoSeleccion.setAttribute("estado","ocupado"); //asigno el estado del contenedor como ocupado 
+     //Si el elemento tiene asignado el estado libre , entonces se puede seleccionar ese casillero
+        if (elemento.getAttribute("estado")=="libre") {
+         //Genero el contenido HTML para meter en el contenedor correspondiente al paso
+         let contenidoElemento= document.createElement("center"); 
+         contenidoElemento.appendChild(imagenPaso);
+         //Asigno el elememento seleccion
+         let elementoSeleccion=document.getElementById(elemento.id); //guardo el elemento seleccionado
+         elementoSeleccion.setAttribute("estado","ocupado"); //asigno el estado del contenedor como ocupado 
+         //Si es un circulo marco el atributo objeto con "circulo" , sino marco el atributo con "cruz"
+            if (tipoImagen=="circulo") {
+             elementoSeleccion.setAttribute("objeto","circulo");
+            }
+            else {
+             elementoSeleccion.setAttribute("objeto","cruz");
+            }
+         
+         elementoSeleccion.appendChild(contenidoElemento); //le inserto la imagen correspondiente , cruz o circulo
+         //Veriicamos si no hemos ganado luego de hacer la seleccion , se no ser asi continuamos
+            if (verificarGanador()==true) {
+             //paso el nombre del ganador y con lo que estaba jugando
+             mostrarMensajeFinal(nombreJugadorActual,tipoImagen); 
+            }
+            else {
+             //Una vez que seleccione avanzo otro paso
+             avanzarPaso();
+            }   
 
-        //Si es un circulo marco el atributo objeto con "circulo" , sino marco el atributo con "cruz"
-        if (tipoImagen=="circulo") {
-         elementoSeleccion.setAttribute("objeto","circulo");
-        }
-        else {
-         elementoSeleccion.setAttribute("objeto","cruz");
-        }
-   
-     elementoSeleccion.appendChild(contenidoElemento); //le inserto la imagen correspondiente , cruz o circulo
-      
-        //Veriicamos si no hemos ganado luego de hacer la seleccion , se no ser asi continuamos
-        if (verificarGanador()==true) {
-         mostrarMensajeFinal(nombreJugadorActual,tipoImagen); //paso el nombre del ganador y con lo que estaba jugando
-        }
-        else {
-         //Una vez que seleccione avanzo otro paso
-         avanzarPaso();
-        }   
-    }
-    //Si el elemento tiene asignado el estado ocupado , entonces no se puede completar ese casillero
-    else { 
-     alert("Este casillero ya se encuentra ocupado , seleccione otro");
-    } 
+            }
+            //Si el elemento tiene asignado el estado ocupado , entonces no se puede completar ese casillero
+            else { 
+             alert("Este casillero ya se encuentra ocupado , seleccione otro");
+            }  
+        } 
 }
 
 //Funcion que me permite avanzar pasos en la ejecucion del juego
@@ -249,27 +259,35 @@ function verificarCombinaciones(listado){
  //que contiene las posiciones validadas en el metodo anterior
 
     if ((listado.includes(1)) && (listado.includes(2)) && (listado.includes(3))) {
+     colorearGanadora(1,2,3); //coloreo los elementos ganadores
      return true;
     }
     if ((listado.includes(4)) && (listado.includes(5)) && (listado.includes(6))) {
+     colorearGanadora(4,5,6); //coloreo los elementos ganadores
      return true;
     }
     if ((listado.includes(7)) && (listado.includes(8)) && (listado.includes(9))) {
+     colorearGanadora(7,8,9); //coloreo los elementos ganadores
      return true;
     }
     if ((listado.includes(1)) && (listado.includes(4)) && (listado.includes(7))) {
+     colorearGanadora(1,4,7); //coloreo los elementos ganadores
      return true;
     }
     if ((listado.includes(2)) && (listado.includes(5)) && (listado.includes(8))) {
+     colorearGanadora(2,5,8); //coloreo los elementos ganadores
      return true;
     }
     if ((listado.includes(3)) && (listado.includes(6)) && (listado.includes(9))) {
+     colorearGanadora(3,6,9); //coloreo los elementos ganadores
      return true;
     }
     if ((listado.includes(1)) && (listado.includes(5)) && (listado.includes(9))) {
+     colorearGanadora(1,5,9); //coloreo los elementos ganadores
      return true;
     }
     if ((listado.includes(3)) && (listado.includes(5)) && (listado.includes(7))) {
+     colorearGanadora(3,5,7); //coloreo los elementos ganadores
      return true;
     }
     else {
@@ -277,8 +295,48 @@ function verificarCombinaciones(listado){
     }
 }
 
+//Funcion para cambiar el background a los elementos que contienen la recta ganadora
+function colorearGanadora(posicion1,posicion2,posicion3){
+ //Cambiamos el background del elemento de la posicion1 pasada por parametro
+ let claseAntigua1=document.getElementById("posicion"+posicion1).getAttribute("class");
+ document.getElementById("posicion"+posicion1).className=claseAntigua1+" contenedorganador";
+
+ //Cambiamos el background del elemento de la posicion2 pasada por parametro
+ let claseAntigua2=document.getElementById("posicion"+posicion2).getAttribute("class");
+ document.getElementById("posicion"+posicion2).className=claseAntigua2+" contenedorganador";
+
+ //Cambiamos el background del elemento de la posicion3 pasada por parametro
+ let claseAntigua3=document.getElementById("posicion"+posicion3).getAttribute("class");
+ document.getElementById("posicion"+posicion3).className=claseAntigua3+" contenedorganador";
+
+ //Los elementos que cambie, los almaceno
+ var elemento1 = new Object();
+ elemento1.claseAntigua=claseAntigua1;
+ elemento1.id="posicion"+posicion1;
+ listadoElementosGanadores.push(elemento1);
+
+ var elemento2 = new Object();
+ elemento2.claseAntigua=claseAntigua2;
+ elemento2.id="posicion"+posicion2;
+ listadoElementosGanadores.push(elemento2);
+
+ var elemento3 = new Object();
+ elemento3.claseAntigua=claseAntigua3;
+ elemento3.id="posicion"+posicion3;
+ listadoElementosGanadores.push(elemento3);
+}
+
+//Funcion para limpiar los background de los contenedores ganadores
+function limpiarContenedores() {
+ console.log(listadoElementosGanadores)
+    for (let index = 0; index < listadoElementosGanadores.length ; index++) {
+      document.getElementById(listadoElementosGanadores[index].id).className=listadoElementosGanadores[index].claseAntigua;
+    }    
+}
+
 //Funcion que Imprime el mensaje final con el ganador
 function mostrarMensajeFinal(nombre,jugabaCon) {
+ partidaFinalizada=true; //doy por finalizado el juego
  let movimientosResultado=document.getElementById("pasoActual").innerHTML;
  let imprimirResultado="El jugador "+nombre+" fue el ganador de la partida , jugando con "+jugabaCon+" en "+movimientosResultado+" movimientos";
  document.getElementById("mensajeFinal").innerHTML=imprimirResultado;
