@@ -1,7 +1,24 @@
 .principal {
- padding-top:5%;
- padding-bottom:5%;
+ padding-top:1%;
+ padding-bottom:0px;
+ min-width:100%; 
 }
+
+.logo {
+ max-height:100px;
+ max-width:150px;
+}
+
+.home {
+ padding-top:5%;
+ max-width:80%;
+}
+
+.header {
+ background: rgb(131,58,180);
+ background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+}
+
 
 .tateti {
  font-family: "Arial Black", Gadget, sans-serif;

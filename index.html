@@ -1,95 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
- <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- <meta name="description" content="">
- <meta name="author" content="">
- <title>Tateti con Carlitox</title>
- <!-- Bootstrap core CSS -->
- <link href="css/bootstrap.min.css" rel="stylesheet">
- <link href="css/estilos.css" rel="stylesheet">
- <link href="image/favicon.ico" rel="icon" type="image/ico"/>
- <script type="text/javascript">
- //Funcion para Iniciar el juego
-   function iniciarJuego() {
-     let player1=document.getElementById('jugador1').value;
-     let player2=document.getElementById('jugador2').value;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Sitio web para jugar al Tateti">
+  <meta name="author" content="Carlitox">
+  <title>Tateti for Carlitox!</title>
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.css" rel="stylesheet">  
+  <!-- Favicon -->
+  <link href="image/favicon.ico" rel="icon" type="image/ico"/>
+  <!-- Estilos personalizados -->
+  <link href="css/estilos.css" rel="stylesheet"> 
+
+   <!-- Scripts para detectar los jugadores -->
+    <script type="text/javascript">
+     //Funcion para Iniciar el juego
+      function iniciarJuego() {
+       let player1=document.getElementById('jugador1').value;
+       let player2=document.getElementById('jugador2').value;
         if ((player1=="") || (player2 =="")) {
          alert("No puede dejar un nombre vacio");
         }
         else {
-    	 localStorage.setItem("configJuego",JSON.stringify({jugador1:player1,jugador2:player2}));
+        localStorage.setItem("configJuego",JSON.stringify({jugador1:player1,jugador2:player2}));
          window.location = "jugar.html"; 
         }      
-    }
-</script>
+      }
+    </script>
 </head>
 
 <body>
+
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Tateti con Carlitox</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-          </li>          
-        </ul>
-      </div>
-    </div>
+  <nav class="navbar navbar-light bg-light static-top header">
+  <div class="container">
+   <a class="navbar-brand" href="index.html"><img class="logo" src="image/logo.png"></a>      
+  </div>
   </nav>
-  
+
+  <!-- Header --> 
+  <div class="container home">  
+  <center><h1>¿Aburrido? a jugar un <span class="badge badge-secondary">Tateti!</span></h1></center>
+  <hr>
+  <br>
+  <div class="row">
+   <div class="col">
+   <input id="jugador1" type="text" class="form-control" placeholder="Jugador 1">
+   </div>
+   <h3>VS</h3>
+   <div class="col">
+   <input id="jugador2" type="text" class="form-control" placeholder="Jugador 2">
+   </div>  
+   </div>
+   <br>
+   <button onclick="iniciarJuego();" type="submit" class="btn btn-block btn-lg btn-primary">Jugar</button>   
+  </div>
+  </div>
+
  
- <!-- Contenedor -->
- <div class="container principal">
- <center>
- <h2>Tateti con Carlitox</h2>
- <br>
- 
- <div class="row">
-    <!-- Columna Izquierda -->
-    <div class="col">
-      <img src="image/tateti.jpg"></img>
-    </div>
-    <!-- Columna Izquierda -->
-    <!-- Columna Derecha -->
-     <div class="col">
-     <h4>Completa los jugadores y a jugar!</h4>
-     <hr>
-     <form name="formulario">
-     <div class="form-group row">
-     <label for="jugador1" class="col-4 col-form-label">Jugador 1</label> 
-     <div class="col-8">
-     <input id="jugador1" name="jugador1" placeholder="Nombre del jugador 1" type="text" class="form-control">
-     </div>
-     </div>
-     <div class="form-group row">
-     <label class="col-4 col-form-label" for="jugador2">Jugador 2</label> 
-     <div class="col-8">
-     <input id="jugador2" name="jugador2" placeholder="Nombre del jugador 2" type="text" class="form-control">
-     </div>
-     </div> 
-     <div class="form-group row">
-     <div class="offset-4 col-8">
-     <a name="submit" type="submit" class="btn btn-primary" onclick="iniciarJuego();" href="#">Iniciar Juego</a>
-    
-     </div>
-     </div>
-     </form>
-     </div>
-    <!-- Columna Derecha -->
- </div> 
- <!-- Termina el contenedor -->
- </body>
- <br>
- <br>
- <br>
   <!-- Bootstrap core JavaScript -->
   <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>  
+  <script src="js/bootstrap.js"></script>
+</body>
 </html>
