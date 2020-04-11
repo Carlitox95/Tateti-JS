@@ -80,6 +80,11 @@
  border-left: 3px dotted #1C6EA4;
 }
 
+.columnacentral {
+ padding-right:0px;
+ padding-left: 0px;
+}
+
 .imagenobjeto {
  width: auto;
  height: 60px;

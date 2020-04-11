@@ -13,22 +13,6 @@
   <link href="image/favicon.ico" rel="icon" type="image/ico"/>
   <!-- Estilos personalizados -->
   <link href="css/estilos.css" rel="stylesheet"> 
-
-   <!-- Scripts para detectar los jugadores -->
-    <script type="text/javascript">
-     //Funcion para Iniciar el juego
-      function iniciarJuego() {
-       let player1=document.getElementById('jugador1').value;
-       let player2=document.getElementById('jugador2').value;
-        if ((player1=="") || (player2 =="")) {
-         alert("No puede dejar un nombre vacio");
-        }
-        else {
-        localStorage.setItem("configJuego",JSON.stringify({jugador1:player1,jugador2:player2}));
-         window.location = "jugar.html"; 
-        }      
-      }
-    </script>
 </head>
 
 <body>
@@ -55,7 +39,12 @@
    </div>  
    </div>
    <br>
-   <button onclick="iniciarJuego();" type="submit" class="btn btn-block btn-lg btn-primary">Jugar</button>   
+   <button onclick="iniciarJuego();" type="submit" class="btn btn-block btn-lg btn-primary">Jugar 1 VS 1</button>
+
+   <br>
+   <center><h2>Desafio Individual <span class="badge badge-secondary">New</span></h2></center>
+   <hr>
+   <button onclick="iniciarDesafio();" type="button" class="btn btn-primary btn-lg btn-block">Desafiar Individualmente</button> 
   </div>
   </div>
 
@@ -63,5 +52,6 @@
   <!-- Bootstrap core JavaScript -->
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.js"></script>
+  <script src="js/configTateti.js"></script>
 </body>
 </html>

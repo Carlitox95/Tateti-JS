@@ -6,6 +6,8 @@
 const datosejercicio = JSON.parse(localStorage.getItem('configJuego'));
 let player1=datosejercicio.jugador1;
 let player2=datosejercicio.jugador2;
+let modoJuego=datosejercicio.modo;
+
 
 //Seteo la maxima cantidad de movimientos que se pueden realizar (hay 9 espacios)
 let turnosMax=9; 
@@ -22,6 +24,9 @@ let listadoTurnos=[];
 
 //Contiene el listado de elementos que cambiaron su estilo a ganadora durante la ultima ronda
 let listadoElementosGanadores=[];
+
+//Contiene el listado de los casilleros libres para el modo de juego VS LA CPU
+let listadoCasillerosLibresCPU=[];
 
 //Defino los links de las imagenes para completar
 let imagenCirculo="image/circulo.png";
@@ -50,7 +55,12 @@ listaJugadores.push(jugador2);
 detectarJugadores();
 
 //Inicio la ejecucion
-iniciarJuego(); 
+if (modoJuego=="1VS1") {
+ iniciarJuego('1VS1'); 
+}
+else {
+ iniciarJuego('CPU');
+}
 
 //----------------------------------------------------//
 //Funciones para permiten el funcionamiento del juego
@@ -74,10 +84,15 @@ function detectarJugadores(){
 
 
 //Funcion que inicia el juego
-function iniciarJuego() {
+function iniciarJuego(modoJuego) {
  reiniciarJuego(); //me aseguro de resetear todos los contenedores 
  pasoActual++;
- document.getElementById("pasoActual").innerHTML=pasoActual;
+ document.getElementById("pasoActual").innerHTML=pasoActual;  
+
+    if(modoJuego=="CPU") {
+     verificarTurnoCPU(); //Verifico si es el turno de la CPU
+    }    
+    //console.log(listadoTurnos)  
 }
 
 //Funcion que reinicia el juego
@@ -95,6 +110,7 @@ function reiniciarJuego() {
      document.getElementById(elementoActual).appendChild(contenidoElemento);
     }
  listadoTurnos=[]; //si reinicio debo vaciar el listado de turnos sucesivos
+ listadoCasillerosLibresCPU=[]; //reinicio el listado de los casilleros libres contra la CPU
  definirArranque(); //por lo cual debo volver a definir quien arranca
  limpiarContenedores(); //limpio los contenedores
  partidaFinalizada=false; //vuelvo a permitir la seleccion
@@ -137,7 +153,6 @@ function definirArranque() {
 
 //Funcion asigna la seleccion de un elemento , asignando cruz o circulo
 function seleccionElemento(elemento) {
-
     if (partidaFinalizada==false) {
      //Obtengo el numero de paso actual
      let nroActual=document.getElementById("pasoActual").innerHTML; //obtengo el paso actual
@@ -180,7 +195,7 @@ function seleccionElemento(elemento) {
             }
             //Si el elemento tiene asignado el estado ocupado , entonces no se puede completar ese casillero
             else { 
-             alert("Este casillero ya se encuentra ocupado , seleccione otro");
+             //alert("Este casillero ya se encuentra ocupado , seleccione otro");
             }  
         } 
 }
@@ -192,6 +207,7 @@ function avanzarPaso(){
     if (verificarFinal(nroActual)==false) {
      document.getElementById("pasoActual").innerHTML=nroActual;
      document.getElementById("turnoJugador").innerHTML=listadoTurnos[parseInt(nroActual)-parseInt(1)][0];
+     verificarTurnoCPU(); //chequeo si es el turno nuevamente de la CPU
     } else {
      alert("Estoy en el final del juego, se llenaron los 9 casilleros");
     }
@@ -329,7 +345,6 @@ function colorearGanadora(posicion1,posicion2,posicion3){
 
 //Funcion para limpiar los background de los contenedores ganadores
 function limpiarContenedores() {
- console.log(listadoElementosGanadores)
     for (let index = 0; index < listadoElementosGanadores.length ; index++) {
       document.getElementById(listadoElementosGanadores[index].id).className=listadoElementosGanadores[index].claseAntigua;
     }    
@@ -341,4 +356,60 @@ function mostrarMensajeFinal(nombre,jugabaCon) {
  let movimientosResultado=document.getElementById("pasoActual").innerHTML;
  let imprimirResultado="El jugador "+nombre+" fue el ganador de la partida , jugando con "+jugabaCon+" en "+movimientosResultado+" movimientos";
  document.getElementById("mensajeFinal").innerHTML=imprimirResultado;
+}
+
+//----------------------------------------------------//
+//Funciones dedicadas exclusivamente para el juego VS CPU
+//----------------------------------------------------//
+
+
+// posicion1    posicion2   posicion3
+// posicion4    posicion5   posicion6   -> c/u posee el atributo "estado" = "libre/ocupado"
+// posicion7    posicion8   posicion9
+
+//Funcion Auxiliar para obtener un numero aleatorio entre 2 numeros 
+function numeroAleatorio(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
+}
+
+//Funcion que verifica si es el turno de que la CPU haga su movimiento
+function verificarTurnoCPU() {
+ //let turnoActual=document.getElementById("turnoJugador").innerHTML; 
+ //pasoActual ID //console.log(listadoTurnos) 
+ let turnoActual=document.getElementById("pasoActual").innerHTML; 
+ let auxiliar=listadoTurnos[parseInt(turnoActual)-parseInt(1)][0]; //obtengo nombre del user que va en el turno actual
+ console.log("Es el turno de "+auxiliar)
+    if (auxiliar=="CPU") {     
+     seleccionarElementoCPU(); //Realizo una seleccion automatica para la CPU  
+    } 
+}
+
+//Funcion que me retorna las casillas libres del tablero
+function obtenerListadoCasillerosLibres() {
+    for (let index = 1; index <= 9; index++) { 
+     let casilleroActual="posicion"+index;
+     let casillero=document.getElementById(casilleroActual).getAttribute("estado");
+        if (casillero=="libre") {
+         listadoCasillerosLibresCPU.push(casilleroActual); //si esta libre lo agrego al listo
+        }
+    }
+ let listadoLibres=listadoCasillerosLibresCPU; //asigno el listado actual a uno nuevo
+ listadoCasillerosLibresCPU=[]; //vacio mi listado auxiliar para trabajar
+ return listadoLibres; //retorno el listado de libres
+}
+
+
+//Funcion para que la CPU automaticamente seleccione un elemento
+function seleccionarElementoCPU() { 
+ let listadoLibres=obtenerListadoCasillerosLibres(); //primero obtengo los casilleros que puedo utilizar
+ let maximo=parseInt(listadoLibres.length); //elemento final del array
+ //console.log(listadoLibres)
+ //console.log("Hay libres "+maximo+" casilleros de los 9 originales")
+ let aleatorio=numeroAleatorio(0,maximo-1);
+ //console.log("Se utiliza el aleatorio "+aleatorio+" para la posicion dentro del array")
+ let posicionAleatoria=listadoLibres[aleatorio]; //obtengo un numero aleatorio
+ //console.log("Se utilizo el casillero "+posicionAleatoria+" para la CPU")
+ let elementoCasillero=document.getElementById(posicionAleatoria); //obtengo el elemento enviar por parametro 
+ seleccionElemento(elementoCasillero); //invoco al metodo para seleccionar el elemento 
+ //console.log("----------------------------")
 }
