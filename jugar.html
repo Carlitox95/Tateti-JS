@@ -26,12 +26,12 @@
  <!-- Contenedor -->
  <div class="container principal">
  <center>
- <button type="button" class="btn btn-primary btn-lg btn-block" onclick="iniciarJuego();">Reiniciar Juego</button>
+ <button type="button" class="btn btn-primary btn-lg btn-block botonSuperior" onclick="iniciarJuego();">Reiniciar Juego</button>
  </center> 
  <hr> 
     
     <!-- Inicio de los detalles -->
-     <div class="row">
+     <div class="row datosJuego">
      <!-- soy una barra separadora barata -->
      <div class="col-sm"><center>
      <span class="font-weight-bold">Jugadores: </span> <small><span id="listadojugadores"></span></small>
@@ -72,7 +72,7 @@
     <!-- Termina el cuadro del TATETI -->
 
 <!-- Inicia el mensaje donde se informa al ganador del juego -->
-<div class="alert alert-success" id="mensajeFinal" align="center">
+<div class="alert alert-success mensajeFinal" id="mensajeFinal" align="center">
  <strong>La partida aun se encuentra en disputa!</strong>
 </div>
 <!-- Termina el mensaje donde se informa al ganador del juego -->
@@ -80,6 +80,20 @@
 </div> 
 <!-- Termina el contenedor -->
 </body>
+
+<!-- Footer -->  
+  <footer class="footer">
+      <div class="container">
+        <center>
+        <span class="textoFooter">@CarlitoxCV95 "Simplemente jugar!" 
+        <a class="textoFooter" href="https://github.com/Carlitox95/WebApp-Tateti">
+        <img class="iconoFooter" src="image/github.png"></img>
+        </a>              
+        </span>
+        </center>
+      </div>
+  </footer>
+  <!-- Footer -->
 <!-- Bootstrap core JavaScript -->
  <script src="js/jquery.min.js"></script>
  <script src="js/bootstrap.js"></script>

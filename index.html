@@ -27,29 +27,37 @@
   <!-- Header --> 
   <div class="container home">  
   <center><h3>¿Aburrido? <span class="badge badge-secondary">Tateti!</span></h3></center>
-  <hr>
-  <br>
+  <hr>  
   <div class="row">
    <div class="col">
-   <input id="jugador1" type="text" class="form-control" placeholder="Jugador 1">
+   <input id="jugador1" type="text" class="form-control botonesHome" placeholder="Jugador 1">
    </div>
    <h3>VS</h3>
    <div class="col">
-   <input id="jugador2" type="text" class="form-control" placeholder="Jugador 2">
+   <input id="jugador2" type="text" class="form-control botonesHome" placeholder="Jugador 2">
    </div>  
-   </div>
-   <br>
-   <button onclick="iniciarJuego();" type="submit" class="btn btn-block btn-lg btn-primary">Jugar 1 VS 1</button>
-
-   <br>
+   </div>   
+   <button onclick="iniciarJuego();" type="submit" class="btn btn-block btn-lg btn-primary botonesHome">Jugar 1 VS 1</button>   
    <center><h4>Desafio Individual <span class="badge badge-secondary">New</span></h4></center>
-   <hr>
-   <br>
-   <input id="jugadorindividual" class="form-control" type="text" placeholder="Tu Nombre">
-   <br>
-   <button onclick="iniciarDesafio();" type="button" class="btn btn-primary btn-lg btn-block">Desafiar Individualmente</button> 
-  </div>
-  </div>
+   <hr>   
+   <input id="jugadorindividual" class="form-control botonesHome" type="text" placeholder="Tu Nombre">
+   <button onclick="iniciarDesafio();" type="button" class="btn btn-primary btn-lg btn-block botonesHome">Desafio Individual</button> 
+   </div>
+
+  </div>  
+  <!-- Footer -->  
+  <footer class="footer">
+      <div class="container">
+        <center>
+        <span class="textoFooter">@CarlitoxCV95 "Simplemente jugar!" 
+        <a class="textoFooter" href="https://github.com/Carlitox95/WebApp-Tateti">
+        <img class="iconoFooter" src="image/github.png"></img>
+        </a>              
+        </span>
+        </center>
+      </div>
+  </footer>
+  <!-- Footer -->
 
  
   <!-- Bootstrap core JavaScript -->

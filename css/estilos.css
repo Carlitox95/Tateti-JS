@@ -13,7 +13,12 @@
 
 .home {
  padding-top:2%;
- max-width:70%;
+ max-width:60%;
+ padding-bottom:2%;
+}
+
+.botonesHome {
+ margin-bottom:10px;
 }
 
 .header {
@@ -21,8 +26,25 @@
  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
 }
 
-@media screen and (max-width:640px) {
-  /* reglas CSS */
+.footer {
+ background: rgb(131,58,180);
+ background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+ position: absolute;
+ bottom: 0;
+ width: 100%;
+ height: 60px;
+ line-height: 60px;
+ vertical-align:center;
+}
+
+.textoFooter {
+ color:white;
+}
+
+.iconoFooter {
+ width:30px;
+ height:30px;
+ vertical-align:center;
 }
 
 /* --------- Reglas para la caja del Tateti --------- */
@@ -80,8 +102,23 @@
 
 /* Adaptacion Mobile del contenedor del juego */
 @media screen and (max-width:640px) {
+	.header {
+	 height:50px; 
+	 vertical-align:center;    
+    }
+    .logo {
+     max-height:40px;
+     max-width:150px;
+     padding-bottom:10%;
+    }
+    .botonSuperior {
+     height:2%;
+    }
+    .datosJuego {
+     height:2%;
+    }
 	.contenedorColumnas{
-     width:100%;
+     width:100%;     
 	}
     .columnaIzquierda {
      width:32%;
@@ -97,6 +134,23 @@
     .imagenObjeto {
      width: auto;
      height: 30px;
+    }
+    .footer { 
+     position: absolute;
+     bottom: 0;
+     width: 100%;
+     height: 30px;
+     line-height: 30px;
+     vertical-align:center;
+    }
+    .iconoFooter {
+     width:15px;
+     height:15px;
+     vertical-align:center;
+    }
+    .mensajeFinal{
+     width:100%;
+     height:10%;
     }
 }
 
