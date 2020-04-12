@@ -26,19 +26,38 @@
  <!-- Contenedor -->
  <div class="container principal">
  <center>
- <button type="button" class="btn btn-primary btn-lg btn-block" onclick="iniciarJuego();">Iniciar / Reiniciar Juego</button>
+ <button type="button" class="btn btn-primary btn-lg btn-block" onclick="iniciarJuego();">Reiniciar Juego</button>
  </center> 
  <hr> 
-    <div class="row justify-content-center">
-    <!-- Cuadro del TATETI -->  
-    <div class="col-sm-10 tateti">      
+    
+    <!-- Inicio de los detalles -->
+     <div class="row">
+     <!-- soy una barra separadora barata -->
+     <div class="col-sm"><center>
+     <span class="font-weight-bold">Jugadores: </span> <small><span id="listadojugadores"></span></small>
+     <center></div>
+     <!-- soy una barra separadora barata -->
+     <div class="col-sm"><center>
+     <span class="font-weight-bold">Turno:</span> Esperando a <span id="turnoJugador"></span>
+     <div class="spinner-border spinner-border-sm text-primary" role="status"><span class="sr-only">Loading...</span></div>
+     <center></div>
+     <div class="col-sm"><center>
+     <!-- soy una barra separadora barata -->
+     <span class="font-weight-bold">Movimiento: </span><span id="pasoActual"></span><center></div>
+     <!-- soy una barra separadora barata -->
+     </div>
+     <br>
+    <!-- Terminan los detalles -->
+
+
+    <!-- Cuadro del TATETI -->            
      <div class="row justify-content-center"> 
      <div class="col-sm">
      <div class="fila1 columna1" id="posicion1" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion1</div>
      <div class="fila2 columna1" id="posicion4" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion4</div>
      <div class="fila3 columna1" id="posicion7" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion7</div>
      </div>
-     <div class="col-sm columnacentral">    
+     <div class="col-sm columnaCentral">    
       <div class="fila1 columna2" id="posicion2" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion2</div>
       <div class="fila2 columna2" id="posicion5" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion5</div>
       <div class="fila3 columna2" id="posicion8" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion8</div>
@@ -48,29 +67,9 @@
       <div class="fila2 columna3" id="posicion6" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion6</div>
       <div class="fila3 columna3" id="posicion9" estado="libre" objeto="" onclick="seleccionElemento(this);">posicion9</div>
      </div> 
-    </div>
+     </div>
+     <hr>    
     <!-- Termina el cuadro del TATETI -->
-    </div>
-    <!-- Inicia la columna de la derecha -->
-    <div class="col-sm-2">
-     <h6>Jugadores Activos</h6>
-     <hr>
-     <ul class="list-group list-group-flush" id="listadojugadores">
-     
-     </ul>
-     <hr>
-     <h6>Turno Actual</h6><p id="turnoJugador"></p>
-     <hr>
-     <h6>Paso Actual: </h6><p id="pasoActual"></p>
-    </div>
-    <!-- Termina la columna de la derecha -->
-    </div>
-
-<!-- Inicia el Mensaje que aparece en la parte inferior de la pantalla -->
-<div class="mensajeinferior alert alert-info" id="mensajeInferior" align="center"> 
-
-</div>
-<!-- Termina el Mensaje que aparece en la parte inferior de la pantalla -->
 
 <!-- Inicia el mensaje donde se informa al ganador del juego -->
 <div class="alert alert-success" id="mensajeFinal" align="center">

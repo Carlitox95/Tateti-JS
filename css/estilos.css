@@ -1,7 +1,7 @@
 .principal {
  padding-top:1%;
  padding-bottom:0px;
- min-width:100%; 
+ min-width:80%; 
 }
 
 .logo {
@@ -10,8 +10,8 @@
 }
 
 .home {
- padding-top:5%;
- max-width:80%;
+ padding-top:2%;
+ max-width:70%;
 }
 
 .header {
@@ -33,8 +33,12 @@
  text-transform: none;
 }
 
-.mensajeinferior {
+.mensajeInferior {
  margin-top:1%;
+}
+
+.nombreJugador {
+ padding-left:5px;
 }
 
 .fila1 {
@@ -80,17 +84,17 @@
  border-left: 3px dotted #1C6EA4;
 }
 
-.columnacentral {
+.columnaCentral {
  padding-right:0px;
  padding-left: 0px;
 }
 
-.imagenobjeto {
+.imagenObjeto {
  width: auto;
  height: 60px;
 }
 
-.contenedorganador {
+.contenedorGanador {
  background: #d2ff52;
  background: -moz-linear-gradient(left, #d2ff52 0%, #91e842 100%);
  background: -webkit-gradient(left top, right top, color-stop(0%, #d2ff52), color-stop(100%, #91e842));

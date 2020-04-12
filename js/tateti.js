@@ -35,7 +35,7 @@ let imagenCruz="image/cruz.png"
 //Defino un objeto html nulo para iniciar el ejercicio solo con el fin de rellenar espacio en los contenedores
 let objetoVacio= document.createElement("img");
 objetoVacio.src="image/vacio.png";
-objetoVacio.className="imagenobjeto";
+objetoVacio.className="imagenObjeto";
 
 //Defino en un objeto mi jugador 1
 //formato player=nombreJugador , objetoCirculo=circulo ,el numero de jugador y lo que contiene cruz o circulo
@@ -69,17 +69,7 @@ else {
 //Funcion que me detecta quienes son los que estan jugando
 function detectarJugadores(){
  let contenedorJugadores=document.getElementById("listadojugadores");
- //Defino el jugador1
- let jugador1=document.createElement("p");
- jugador1Contenido=document.createTextNode(player1);
- jugador1.appendChild(jugador1Contenido);
- //Defino el jugador2
- let jugador2=document.createElement("p"); 
- jugador2Contenido=document.createTextNode(player2);
- jugador2.appendChild(jugador2Contenido);
- //Agrego ambos jugadores al listado
- contenedorJugadores.appendChild(jugador1);
- contenedorJugadores.appendChild(jugador2);
+ contenedorJugadores.innerHTML=player1+ " VS "+player2; 
 }
 
 
@@ -124,14 +114,12 @@ function definirArranque() {
  let aleatorio1 = Math.random();
  let aleatorio2 = Math.random();
 
-    if (aleatorio1>aleatorio2) {
-     document.getElementById("mensajeInferior").innerHTML="<strong>Atencion!</strong> Aleatoriamente comienza el jugador "+listaJugadores[0][0]+" jugando con "+listaJugadores[0][3];
+    if (aleatorio1>aleatorio2) {     
      document.getElementById("turnoJugador").innerHTML=listaJugadores[0][0];
      listadoTurnos.push(listaJugadores[0]);
      listadoTurnos.push(listaJugadores[1]);
     }
-    else {
-     document.getElementById("mensajeInferior").innerHTML="<strong>Atencion!</strong> Aleatoriamente comienza el jugador "+listaJugadores[1][0]+" jugando con "+listaJugadores[1][3];
+    else {    
      document.getElementById("turnoJugador").innerHTML=listaJugadores[1][0];
      listadoTurnos.push(listaJugadores[1]);
      listadoTurnos.push(listaJugadores[0]);
@@ -162,7 +150,7 @@ function seleccionElemento(elemento) {
      //Vamos a crear la imagen para insertar el contenedor
      let imagenPaso=document.createElement("img");
      imagenPaso.src=contenidoImagenPaso;
-     imagenPaso.className="imagenobjeto";
+     imagenPaso.className="imagenObjeto";
      let tipoImagen=listadoTurnos[parseInt(nroActual)-parseInt(1)][3]; //es cruz o circulo
 
      //Si el elemento tiene asignado el estado libre , entonces se puede seleccionar ese casillero
@@ -209,7 +197,7 @@ function avanzarPaso(){
      document.getElementById("turnoJugador").innerHTML=listadoTurnos[parseInt(nroActual)-parseInt(1)][0];
      verificarTurnoCPU(); //chequeo si es el turno nuevamente de la CPU
     } else {
-     alert("Estoy en el final del juego, se llenaron los 9 casilleros");
+     alert("Fin del Juego! Empate!");
     }
 }
 
@@ -316,15 +304,15 @@ function verificarCombinaciones(listado){
 function colorearGanadora(posicion1,posicion2,posicion3){
  //Cambiamos el background del elemento de la posicion1 pasada por parametro
  let claseAntigua1=document.getElementById("posicion"+posicion1).getAttribute("class");
- document.getElementById("posicion"+posicion1).className=claseAntigua1+" contenedorganador";
+ document.getElementById("posicion"+posicion1).className=claseAntigua1+" contenedorGanador";
 
  //Cambiamos el background del elemento de la posicion2 pasada por parametro
  let claseAntigua2=document.getElementById("posicion"+posicion2).getAttribute("class");
- document.getElementById("posicion"+posicion2).className=claseAntigua2+" contenedorganador";
+ document.getElementById("posicion"+posicion2).className=claseAntigua2+" contenedorGanador";
 
  //Cambiamos el background del elemento de la posicion3 pasada por parametro
  let claseAntigua3=document.getElementById("posicion"+posicion3).getAttribute("class");
- document.getElementById("posicion"+posicion3).className=claseAntigua3+" contenedorganador";
+ document.getElementById("posicion"+posicion3).className=claseAntigua3+" contenedorGanador";
 
  //Los elementos que cambie, los almaceno
  var elemento1 = new Object();
@@ -379,8 +367,8 @@ function verificarTurnoCPU() {
  let turnoActual=document.getElementById("pasoActual").innerHTML; 
  let auxiliar=listadoTurnos[parseInt(turnoActual)-parseInt(1)][0]; //obtengo nombre del user que va en el turno actual
  console.log("Es el turno de "+auxiliar)
-    if (auxiliar=="CPU") {     
-     seleccionarElementoCPU(); //Realizo una seleccion automatica para la CPU  
+    if (auxiliar=="CPU") { 
+    setTimeout(function(){ seleccionarElementoCPU(); }, 1000); //Realizo una seleccion automatica para la CPU , 1seg despues 
     } 
 }
 

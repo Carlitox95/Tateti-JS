@@ -13,6 +13,12 @@ function iniciarJuego() {
 
 //Funcion para iniciar el juego VS la IA
 function iniciarDesafio(){
- localStorage.setItem("configJuego",JSON.stringify({jugador1:"UsuarioReal",jugador2:"CPU",modo:"CPU"}));
- window.location = "jugar.html"; 
+ let jugadorSolitario=document.getElementById("jugadorindividual").value;
+  if (jugadorSolitario=="") {
+   alert("Por favor ingrese su nombre");
+  }
+  else {
+   localStorage.setItem("configJuego",JSON.stringify({jugador1:jugadorSolitario,jugador2:"CPU",modo:"CPU"}));
+   window.location = "jugar.html"; 
+  }      
 }
