@@ -1,7 +1,9 @@
+/* --------- Reglas para los contenedores --------- */
 .principal {
  padding-top:1%;
  padding-bottom:0px;
- min-width:80%; 
+ #min-width:80%;
+ max-width:95%; 
 }
 
 .logo {
@@ -19,19 +21,11 @@
  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
 }
 
-
-.tateti {
- font-family: "Arial Black", Gadget, sans-serif;
- font-size: 16px;
- letter-spacing: -1.2px;
- word-spacing: 0.4px;
- color: #000000;
- font-weight: normal;
- text-decoration: none;
- font-style: normal;
- font-variant: normal;
- text-transform: none;
+@media screen and (max-width:640px) {
+  /* reglas CSS */
 }
+
+/* --------- Reglas para la caja del Tateti --------- */
 
 .mensajeInferior {
  margin-top:1%;
@@ -83,6 +77,29 @@
 .columna3 {
  border-left: 3px dotted #1C6EA4;
 }
+
+/* Adaptacion Mobile del contenedor del juego */
+@media screen and (max-width:640px) {
+	.contenedorColumnas{
+     width:100%;
+	}
+    .columnaIzquierda {
+     width:32%;
+    }
+    .columnaCentral {
+     width:30%;
+     padding-right:0px;
+     padding-left: 0px;
+    }
+    .columnaDerecha {
+     width:32%;
+    }
+    .imagenObjeto {
+     width: auto;
+     height: 30px;
+    }
+}
+
 
 .columnaCentral {
  padding-right:0px;
